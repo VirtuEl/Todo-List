@@ -1,18 +1,32 @@
 body {
   display: flex;
   justify-content: center;
+  background-size: 100%;
+  background-color: palegreen;
+  margin: 0px;
 }
 
 .todo {
+  width: 300px;
+  border: 1px solid black;
+}
+
+h1 {
+  text-align: center;
 }
 
 .add-todo {
 }
 
 input {
+  width: 300px;
+  border: 1px solid black;
 }
 
 .todos {
+  padding-left: 20px;
+  background-color: white;
+  border: 1px solid black;
 }
 
 .todo-text {
@@ -20,4 +34,6 @@ input {
 }
 
 .buttons {
+  display: flex;
+  justify-content: space-between;
 }
