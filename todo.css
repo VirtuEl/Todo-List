@@ -1,0 +1,23 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.todo {
+}
+
+.add-todo {
+}
+
+input {
+}
+
+.todos {
+}
+
+.todo-text {
+  margin-right: 12px;
+}
+
+.buttons {
+}
