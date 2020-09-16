@@ -6,12 +6,13 @@
 }
 
 #todo {
-  width: 306px;
+  width: 50%;
   border: 1px solid black;
+  min-width: 250px;
 }
 
 #input-newTodo {
-  width: 300px;
+  width: -webkit-fill-available;
   border: 1px solid black;
 }
 
