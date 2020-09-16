@@ -1,26 +1,30 @@
-body {
+.container {
   display: flex;
   justify-content: center;
-  background-size: 100%;
   background-color: palegreen;
   margin: 0px;
 }
 
-.todo {
+#todo {
+  width: 306px;
+  border: 1px solid black;
+}
+
+#input-newTodo {
   width: 300px;
   border: 1px solid black;
 }
 
-h1 {
+#buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headline {
   text-align: center;
 }
 
 .add-todo {
-}
-
-input {
-  width: 300px;
-  border: 1px solid black;
 }
 
 .todos {
@@ -31,9 +35,4 @@ input {
 
 .todo-text {
   margin-right: 12px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
 }

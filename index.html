@@ -7,26 +7,30 @@
     <link rel="stylesheet" href="todo.css" />
   </head>
   <body>
-    <div id="todo">
-      <h1>Todo-List</h1>
-      <div class="add-todo">
-        <input type="text" placeholder="Add Todo" />
-      </div>
-      <ul class="todos">
-        <li>
-          <span class="todo-text">Task1</span
-          ><button class="btn-edit">Edit</button
-          ><button class="btn-delete">Delete</button>
-        </li>
-        <li>
-          <span class="todo-text">Task2</span
-          ><button class="btn-edit">Edit</button
-          ><button class="btn-delete">Delete</button>
-        </li>
-      </ul>
-      <div id="buttons">
-        <button class="btn-clear">Delete all</button>
-        <button class="btn-removeCompleted">Remove Completed</button>
+    <div class="container">
+      <div id="todo">
+        <div class="headline">
+          <h1>Todo-List</h1>
+        </div>
+        <div class="add-todo">
+          <input id="input-newTodo" type="text" placeholder="Add Todo" />
+        </div>
+        <ul class="todos">
+          <li>
+            <span class="todo-text">Task1</span
+            ><button class="btn-edit">Edit</button
+            ><button class="btn-delete">Delete</button>
+          </li>
+          <li>
+            <span class="todo-text">Task2</span
+            ><button class="btn-edit">Edit</button
+            ><button class="btn-delete">Delete</button>
+          </li>
+        </ul>
+        <div id="buttons">
+          <button class="btn-clear">Delete all</button>
+          <button class="btn-removeCompleted">Remove Completed</button>
+        </div>
       </div>
     </div>
   </body>
