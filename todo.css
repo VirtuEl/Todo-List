@@ -1,39 +1,71 @@
-.container {
-  display: flex;
-  justify-content: center;
-  background-color: palegreen;
+* {
   margin: 0px;
 }
 
+.container {
+  display: flex;
+  background-color: white;
+}
+
 #todo {
-  width: 50%;
-  border: 1px solid black;
-  min-width: 250px;
+  width: 100%;
+  min-width: 500px;
+  min-height: 450px;
 }
 
-#input-newTodo {
+.todo__header {
+  margin-top: 150px;
+  background-color: red;
+  height: 150px;
+}
+
+.todo__title {
+  color: white;
+  font: bold italic 110% sans-serif;
+  font-size: 78pt;
+  height: 100px;
+  vertical-align: text-top;
+  padding-left: 100px;
+}
+
+.todo__input {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.todo__input-newTodo {
   width: -webkit-fill-available;
-  border: 1px solid black;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
 }
 
-#buttons {
+.todo__buttons {
   display: flex;
   justify-content: space-between;
 }
 
-.headline {
-  text-align: center;
-}
-
-.add-todo {
-}
-
-.todos {
-  padding-left: 20px;
-  background-color: white;
-  border: 1px solid black;
+.todo__list {
+  min-height: 150px;
+  margin: 0;
+  padding: 0;
 }
 
 .todo-text {
   margin-right: 12px;
+}
+
+.todo__list-li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 100px;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.todo__list-li:nth-child(even) {
+  background: #f4777c;
 }

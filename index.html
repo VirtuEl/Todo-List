@@ -9,27 +9,48 @@
   <body>
     <div class="container">
       <div id="todo">
-        <div class="headline">
-          <h1>Todo-List</h1>
+        <div class="todo__header">
+          <div class="todo__title">
+            <span>TODO</span>
+          </div>
+          <div class="todo__input">
+            <input
+              class="todo__input-newTodo"
+              type="text"
+              placeholder="Введите задание..."
+            />
+          </div>
         </div>
-        <div class="add-todo">
-          <input id="input-newTodo" type="text" placeholder="Add Todo" />
-        </div>
-        <ul class="todos">
-          <li>
-            <span class="todo-text">Task1</span
-            ><button class="btn-edit">Edit</button
-            ><button class="btn-delete">Delete</button>
+        <ul class="todo__list">
+          <li class="todo__list-li">
+            <span class="todo__task">Task1</span
+            ><button class="todo__btn-edit">Edit</button
+            ><button class="todo__btn-delete">Delete</button>
           </li>
-          <li>
-            <span class="todo-text">Task2</span
-            ><button class="btn-edit">Edit</button
-            ><button class="btn-delete">Delete</button>
+          <li class="todo__list-li">
+            <span class="todo__task">Task2</span
+            ><button class="todo__btn-edit">Edit</button
+            ><button class="todo__btn-delete">Delete</button>
+          </li>
+          <li class="todo__list-li" class="checked">
+            <span class="todo__task">Task3</span
+            ><button class="todo__btn-edit">Edit</button
+            ><button class="todo__btn-delete">Delete</button>
+          </li>
+          <li class="todo__list-li">
+            <span class="todo__task">Task4</span
+            ><button class="todo__btn-edit">Edit</button
+            ><button class="todo__btn-delete">Delete</button>
+          </li>
+          <li class="todo__list-li">
+            <span class="todo__task">Task5</span
+            ><button class="todo__btn-edit">Edit</button
+            ><button class="todo__btn-delete">Delete</button>
           </li>
         </ul>
-        <div id="buttons">
-          <button class="btn-clear">Delete all</button>
-          <button class="btn-removeCompleted">Remove Completed</button>
+        <div class="todo__buttons">
+          <button class="todo__btn-removeCompleted">Remove Completed</button>
+          <button class="todo__btn-clear">Delete all</button>
         </div>
       </div>
     </div>
