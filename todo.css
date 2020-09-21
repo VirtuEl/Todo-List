@@ -14,9 +14,9 @@
 }
 
 .todo__header {
-  margin-top: 150px;
+  background: url(image/b4.png);
   background-color: red;
-  height: 150px;
+  height: 300px;
 }
 
 .todo__title {
@@ -26,6 +26,8 @@
   height: 100px;
   vertical-align: text-top;
   padding-left: 100px;
+  padding-top: 130px;
+  margin-bottom: 16px;
 }
 
 .todo__input {
@@ -67,5 +69,41 @@
 }
 
 .todo__list-li:nth-child(even) {
-  background: #f4777c;
+  background: #f7abae;
+}
+
+.todo__list-li:hover {
+  background: #f55b61;
+}
+
+.todo__list-li.checked {
+  background: red;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+.todo__list-li.checked::before {
+  content: "";
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+  margin-left: 50px;
+}
+
+.todo__btn-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 24px 12px 24px;
+}
+
+.todo__btn-delete:hover {
+  background-color: #f44336;
+  color: white;
 }
