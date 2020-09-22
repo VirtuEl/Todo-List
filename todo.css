@@ -14,20 +14,20 @@
 }
 
 .todo__header {
-  background: url(image/b4.png);
   background-color: red;
-  height: 300px;
+  height: 150px;
+  margin-top: 150px;
 }
 
 .todo__title {
   color: white;
   font: bold italic 110% sans-serif;
   font-size: 78pt;
-  height: 100px;
+  height: 78px;
   vertical-align: text-top;
   padding-left: 100px;
-  padding-top: 130px;
   margin-bottom: 16px;
+  line-height: 0.7;
 }
 
 .todo__input {
