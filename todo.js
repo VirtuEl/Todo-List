@@ -14,15 +14,15 @@ function removeTodo(todos, todoId) {
   return todos.filter((todo) => todo.id !== todoId);
 }
 
-function changeTodoTitle(todos, todoId, newTitle) {
+function changeTodoTitle(todos, todoId, newTodoTitle) {
   return todos.map((todo) =>
-    todo.id === todoId ? Object.assign({}, todo, { title: newTitle }) : todo
+    todo.id === todoId ? { ...todo, title: newTodoTitle } : todo
   );
 }
 
 function changeTodoStatus(todos, todoId, isComplete) {
   return todos.map((todo) =>
-    todo.id === todoId ? Object.assign({}, todo, { isComplete }) : todo
+    todo.id === todoId ? { ...todo, isComplete } : todo
   );
 }
 
