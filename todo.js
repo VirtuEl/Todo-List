@@ -6,8 +6,8 @@ function getId() {
   return globalId;
 }
 
-function addTodo(todos, newTodo) {
-  return todos.concat({ id: getId(), title: newTodo, isComplete: false });
+function addTodo(todos, newTodoTitle) {
+  return todos.concat({ id: getId(), title: newTodoTitle, isComplete: false });
 }
 
 function removeTodo(todos, todoId) {
@@ -16,13 +16,13 @@ function removeTodo(todos, todoId) {
 
 function changeTodoTitle(todos, todoId, newTitle) {
   return todos.map((todo) =>
-    todo.id === todoId ? Object.assign(todo, { title: newTitle }) : todo
+    todo.id === todoId ? Object.assign({}, todo, { title: newTitle }) : todo
   );
 }
 
 function changeTodoStatus(todos, todoId, isComplete) {
   return todos.map((todo) =>
-    todo.id === todoId ? Object.assign(todo, { isComplete: isComplete }) : todo
+    todo.id === todoId ? Object.assign({}, todo, { isComplete }) : todo
   );
 }
 
