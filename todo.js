@@ -19,14 +19,16 @@ ${todos
     todo.id === editTodoId
       ? `
 <li class="todo__list-li">
-  <input type="text" value="${todo.title}" />
+<form onsubmit="onSaveTitle(this, event, ${todo.id})">
+  <input name="title" type="text" value="${todo.title}" />
+</form>  
 </li>
 `
       : `
 <li class="todo__list-li ${todo.isComplete ? `checked` : ``}">
-<span class="todo__task">${todo.title}</span
-><span class="todo__btn-edit"
-  ><svg
+<span class="todo__task">${todo.title}</span>
+<span onclick="onEditTodo(${todo.id})" class="todo__btn-edit">
+  <svg
     aria-hidden="true"
     class="iconPencilSm"
     width="14"
@@ -35,8 +37,12 @@ ${todos
   >
     <path
       d="M11.1 1.71l1.13 1.12c.2.2.2.51 0 .71L11.1 4.7 9.21 2.86l1.17-1.15c.2-.2.51-.2.71 0zM2 10.12l6.37-6.43 1.88 1.88L3.88 12H2v-1.88z"
-    /></svg></span
-><span class="todo__btn-delete">&#215;</span>
+    />
+  </svg>
+</span>
+<span onclick="onDeleteTodo(${todo.id})" class="todo__btn-delete">
+  &#215;
+</span>
 </li>
 `
   )
@@ -44,7 +50,7 @@ ${todos
 </ul>
 <div class="todo__buttons">
   <button class="todo__btn-removeCompleted" onclick="onClearCompleted()">Скрыть выполненные</button>
-  <button class="todo__btn-clear">Очистить список</button>
+  <button class="todo__btn-clear" onclick="onClearAll()">Очистить список</button>
 </div>
 `;
 
@@ -54,7 +60,7 @@ let state = {
     { id: 2, title: "Title", isComplete: true },
     { id: 3, title: "Title", isComplete: false },
   ],
-  editTodoId: 3,
+  editTodoId: null,
 };
 
 const renderToDom = (template) => {
@@ -69,6 +75,12 @@ const setState = (newStatePart) => {
 
 const onClearCompleted = () => {
   setState({ todos: removeCompleted(state.todos) });
+};
+
+const onClearAll = () => {
+  setState({
+    todos: [],
+  });
 };
 
 const getFormData = (formElement) => {
@@ -87,6 +99,27 @@ const onAddNewTodo = (formElement, event) => {
   const newTodoIsComplete = formData.isComplete === "on";
   setState({
     todos: addTodo(state.todos, newTodoTitle, newTodoIsComplete),
+  });
+};
+
+const onSaveTitle = (formElement, event, todoId) => {
+  event.preventDefault();
+  const formData = getFormData(formElement);
+  setState({
+    todos: changeTodoTitle(state.todos, todoId, formData.title),
+    editTodoId: null,
+  });
+};
+
+const onEditTodo = (editTodoId) => {
+  setState({
+    editTodoId,
+  });
+};
+
+const onDeleteTodo = (deleteTodoId) => {
+  setState({
+    todos: removeTodo(state.todos, deleteTodoId),
   });
 };
 
