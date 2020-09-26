@@ -11,6 +11,7 @@
   width: 100%;
   min-width: 500px;
   min-height: 450px;
+  border: solid 1px;
 }
 
 .todo__header {

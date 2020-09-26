@@ -10,7 +10,6 @@ const render = ({ todos, editTodoId }) => `
       type="text"
       placeholder="Введите задание..."
     />
-    <input name="isComplete" type="checkbox" />
   </form>
 </div>
 <ul class="todo__list">
@@ -47,19 +46,21 @@ ${todos
 `
   )
   .join("")}
+${
+  todos.length > 0
+    ? `
 </ul>
 <div class="todo__buttons">
   <button class="todo__btn-removeCompleted" onclick="onClearCompleted()">Скрыть выполненные</button>
   <button class="todo__btn-clear" onclick="onClearAll()">Очистить список</button>
-</div>
+</div>`
+    : ``
+}
+
 `;
 
 let state = {
-  todos: [
-    { id: 1, title: "Title", isComplete: false },
-    { id: 2, title: "Title", isComplete: true },
-    { id: 3, title: "Title", isComplete: false },
-  ],
+  todos: [],
   editTodoId: null,
 };
 
