@@ -3,13 +3,15 @@ const render = ({ todos, editTodoId }) => `
   <div class="todo__title">
     <span>TODO</span>
   </div>
-  <div class="todo__input">
+  <form onsubmit="onAddNewTodo(this,event)" class="todo__input">
     <input
+      name="title"
       class="todo__input-newTodo"
       type="text"
       placeholder="Введите задание..."
     />
-  </div>
+    <input name="isComplete" type="checkbox" />
+  </form>
 </div>
 <ul class="todo__list">
 ${todos
@@ -41,18 +43,51 @@ ${todos
   .join("")}
 </ul>
 <div class="todo__buttons">
-  <button class="todo__btn-removeCompleted">Скрыть выполненные</button>
+  <button class="todo__btn-removeCompleted" onclick="onClearCompleted()">Скрыть выполненные</button>
   <button class="todo__btn-clear">Очистить список</button>
 </div>
 `;
 
-const state = {
+let state = {
   todos: [
     { id: 1, title: "Title", isComplete: false },
     { id: 2, title: "Title", isComplete: true },
     { id: 3, title: "Title", isComplete: false },
   ],
   editTodoId: 3,
+};
+
+const renderToDom = (template) => {
+  document.getElementById("todo").innerHTML = template;
+};
+
+const setState = (newStatePart) => {
+  state = { ...state, ...newStatePart };
+  const newHtml = render(state);
+  renderToDom(newHtml);
+};
+
+const onClearCompleted = () => {
+  setState({ todos: removeCompleted(state.todos) });
+};
+
+const getFormData = (formElement) => {
+  const formData = new FormData(formElement);
+  const data = {};
+  for (const [key, value] of formData.entries()) {
+    data[key] = value;
+  }
+  return data;
+};
+
+const onAddNewTodo = (formElement, event) => {
+  event.preventDefault();
+  const formData = getFormData(formElement);
+  const newTodoTitle = formData.title;
+  const newTodoIsComplete = formData.isComplete === "on";
+  setState({
+    todos: addTodo(state.todos, newTodoTitle, newTodoIsComplete),
+  });
 };
 
 const main = () => {
@@ -68,8 +103,8 @@ const getId = () => {
   return globalId;
 };
 
-const addTodo = (todos, newTodoTitle) => {
-  return todos.concat({ id: getId(), title: newTodoTitle, isComplete: false });
+const addTodo = (todos, newTodoTitle, isComplete = false) => {
+  return todos.concat({ id: getId(), title: newTodoTitle, isComplete });
 };
 
 const removeTodo = (todos, todoId) => {
