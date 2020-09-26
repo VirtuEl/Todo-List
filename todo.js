@@ -25,7 +25,9 @@ ${todos
 `
       : `
 <li class="todo__list-li ${todo.isComplete ? `checked` : ``}">
-<span class="todo__task">${todo.title}</span>
+<span onclick="onChangeTodoStatus(${todo.id})" class="todo__task">${
+          todo.title
+        }</span>
 <span onclick="onEditTodo(${todo.id})" class="todo__btn-edit">
   <svg
     aria-hidden="true"
@@ -124,6 +126,12 @@ const onDeleteTodo = (deleteTodoId) => {
   });
 };
 
+const onChangeTodoStatus = (todoId) => {
+  setState({
+    todos: changeTodoStatus(state.todos, todoId),
+  });
+};
+
 const main = () => {
   document.getElementById("todo").innerHTML = render(state);
 };
@@ -151,9 +159,9 @@ const changeTodoTitle = (todos, todoId, newTodoTitle) => {
   );
 };
 
-const changeTodoStatus = (todos, todoId, isComplete) => {
+const changeTodoStatus = (todos, todoId) => {
   return todos.map((todo) =>
-    todo.id === todoId ? { ...todo, isComplete } : todo
+    todo.id === todoId ? { ...todo, isComplete: !todo.isComplete } : todo
   );
 };
 
