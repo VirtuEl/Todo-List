@@ -61,10 +61,16 @@ ${
 
 `;
 
-let state = {
-  todos: [],
-  editTodoId: null,
-};
+const localStorageState = localStorage.getItem("state");
+
+let state = localStorageState
+    ? 
+  JSON.parse(localStorageState)
+    : 
+  {
+    todos: [], 
+    editTodoId: null 
+  };
 
 const renderToDom = (template) => {
   document.getElementById("todo").innerHTML = template;
@@ -73,6 +79,7 @@ const renderToDom = (template) => {
 const setState = (newStatePart) => {
   state = { ...state, ...newStatePart };
   const newHtml = render(state);
+  localStorage.setItem("state", JSON.stringify(state));
   renderToDom(newHtml);
 };
 
