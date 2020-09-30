@@ -141,6 +141,23 @@
   color: white;
 }
 
+.todo__btn-hideUncompleted {
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  color: red;
+  text-align: center;
+  border-radius: 15px;
+  margin: 25px;
+  font-size: 17pt;
+  font-weight: bolder;
+}
+
+.todo__btn-hideUncompleted:hover {
+  background-color: #f44336;
+  color: white;
+}
+
 .todo__btn-clear {
   cursor: pointer;
   background-color: white;
@@ -154,6 +171,23 @@
 }
 
 .todo__btn-clear:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.todo__btn-showAll {
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  color: red;
+  text-align: center;
+  border-radius: 15px;
+  margin: 25px;
+  font-size: 17pt;
+  font-weight: bolder;
+}
+
+.todo__btn-showAll:hover {
   background-color: #f44336;
   color: white;
 }
