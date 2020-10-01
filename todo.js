@@ -54,6 +54,8 @@ ${
 </ul>
 <div class="todo__buttons">
   <button class="todo__btn-removeCompleted" onclick="onClearCompleted()">Скрыть выполненные</button>
+  <button class="todo__btn-hideUncompleted" onclick="onHideUncomleted()">Скрыть невыполненные</button>
+  <button class="todo__btn-showAll" onclick="onShowAll()">Показать все</button>
   <button class="todo__btn-clear" onclick="onClearAll()">Очистить список</button>
 </div>`
     : ``
@@ -78,6 +80,10 @@ const setState = (newStatePart) => {
 
 const onClearCompleted = () => {
   setState({ todos: removeCompleted(state.todos) });
+};
+
+const onHideUncomleted = () => {
+  setState({todos: hideUncomleted(state.todos) });
 };
 
 const onClearAll = () => {
@@ -168,3 +174,7 @@ const changeTodoStatus = (todos, todoId) => {
 const removeCompleted = (todos) => {
   return todos.filter((todo) => todo.isComplete === false);
 };
+
+const hideUncomleted = (todos) => {
+  return todos.filter ((todo) => todo.isComplete === true);
+}; 
