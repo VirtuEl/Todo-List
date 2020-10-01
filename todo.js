@@ -11,8 +11,12 @@ const render = ({ todos, editTodoId }) => `
       placeholder="Введите задание..."
     />
   </form>
-  <button onclick="onUndo()"${historyIndex === -1 ? ` disabled` : ``}>Undo</button>
-  <button onclick="onRedo()"${historyIndex === history.length - 1 ? ` disabled` : ``} >Redo</button>
+  <button onclick="onUndo()"${
+    historyIndex === -1 ? ` disabled` : ``
+  }>Undo</button>
+  <button onclick="onRedo()"${
+    historyIndex === history.length - 1 ? ` disabled` : ``
+  } >Redo</button>
   </div>
 <ul class="todo__list">
 ${todos
@@ -55,7 +59,7 @@ ${
     ? `
 </ul>
 <div class="todo__buttons">
-  <button class="todo__btn-removeCompleted" onclick="onClearCompleted()" class="filter${
+  <button class="todo__btn-removeCompleted" onclick="onHideCompleted()" class="filter${
     state.filter === "unchecked" ? ` active` : ``
   }">Скрыть выполненные</button>
   <button class="todo__btn-hideUncompleted" onclick="onHideUncompleted()" class="filter${
@@ -74,14 +78,13 @@ ${
 
 const localStorageState = localStorage.getItem("state");
 
-let state = (localStorageState !== "undefined" && localStorageState !== null)
-    ? 
-  JSON.parse(localStorageState)
-    : 
-  {
-    todos: [], 
-    editTodoId: null, 
-  };
+let state =
+  localStorageState !== "undefined" && localStorageState !== null
+    ? JSON.parse(localStorageState)
+    : {
+        todos: [],
+        editTodoId: null,
+      };
 
 const openState = state;
 
@@ -95,16 +98,21 @@ const renderToDom = (template) => {
 
 const setState = (newStatePart) => {
   state = { ...state, ...newStatePart };
-  history = history.slice(0, historyIndex+1);
+  history = history.slice(0, historyIndex + 1);
   history.push(state);
-  historyIndex = history.length-1;
+  historyIndex = history.length - 1;
   const newHtml = render(state);
   localStorage.setItem("state", JSON.stringify(state));
   renderToDom(newHtml);
   console.log(newHtml);
 };
 
-const onClearCompleted = () => {
+let unfilteredList = state.todos;
+
+const onHideCompleted = () => {
+  if ((state.filter === null)) {
+    unfilteredList = state.todos;
+  }
   state = { ...state, filter: "unchecked" };
   setState({
     todos: getUncheckedTodo(state.todos),
@@ -112,6 +120,9 @@ const onClearCompleted = () => {
 };
 
 const onHideUncompleted = () => {
+  if ((state.filter === null)) {
+    unfilteredList = state.todos;
+  }
   state = { ...state, filter: "checked" };
   setState({
     todos: getCheckedTodo(state.todos),
@@ -119,8 +130,9 @@ const onHideUncompleted = () => {
 };
 
 const onShowAll = () => {
+  state.todos = unfilteredList;
   state = { ...state, filter: null };
-  setState(newState);
+  setState(state);
 };
 
 const onClearAll = () => {
@@ -176,22 +188,25 @@ const onChangeTodoStatus = (todoId) => {
 };
 
 const onUndo = () => {
-  oldState = (history.length > 1 && historyIndex !== 0) ? history[historyIndex-1] : openState;
+  oldState =
+    history.length > 1 && historyIndex !== 0
+      ? history[historyIndex - 1]
+      : openState;
   state = oldState;
   historyIndex -= 1;
   localStorage.setItem("state", JSON.stringify(oldState));
   const newHtml = render(state);
   renderToDom(newHtml);
-}
+};
 
 const onRedo = () => {
-  oldState = history[historyIndex+1];
-  state = { ...oldState};
+  oldState = history[historyIndex + 1];
+  state = { ...oldState };
   historyIndex += 1;
   localStorage.setItem("state", JSON.stringify(oldState));
   const newHtml = render(state);
-  renderToDom(newHtml); 
-}
+  renderToDom(newHtml);
+};
 
 const main = () => {
   document.getElementById("todo").innerHTML = render(state);
