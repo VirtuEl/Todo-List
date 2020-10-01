@@ -53,9 +53,15 @@ ${
     ? `
 </ul>
 <div class="todo__buttons">
-  <button class="todo__btn-removeCompleted" onclick="onClearCompleted()">Скрыть выполненные</button>
-  <button class="todo__btn-hideUncompleted" onclick="onHideUncomleted()">Скрыть невыполненные</button>
-  <button class="todo__btn-showAll" onclick="onShowAll()">Показать все</button>
+  <button class="todo__btn-removeCompleted" onclick="onClearCompleted()" class="filter${
+    state.filter === "unchecked" ? ` active` : ``
+  }">Скрыть выполненные</button>
+  <button class="todo__btn-hideUncompleted" onclick="onHideUncompleted()" class="filter${
+    state.filter === "checked" ? ` active` : ``
+  }">Скрыть невыполненные</button>
+  <button class="todo__btn-showAll" onclick="onShowAll()" class="filter${
+    state.filter === null ? ` active` : ``
+  }">Показать все</button>
   <button class="todo__btn-clear" onclick="onClearAll()">Очистить список</button>
 </div>`
     : ``
@@ -66,6 +72,7 @@ ${
 let state = {
   todos: [],
   editTodoId: null,
+  filter: null,
 };
 
 const renderToDom = (template) => {
@@ -79,11 +86,22 @@ const setState = (newStatePart) => {
 };
 
 const onClearCompleted = () => {
-  setState({ todos: removeCompleted(state.todos) });
+  state = { ...state, filter: "unchecked" };
+  setState({
+    todos: getUncheckedTodo(state.todos),
+  });
 };
 
-const onHideUncomleted = () => {
-  setState({todos: hideUncomleted(state.todos) });
+const onHideUncompleted = () => {
+  state = { ...state, filter: "checked" };
+  setState({
+    todos: getCheckedTodo(state.todos),
+  });
+};
+
+const onShowAll = () => {
+  state = { ...state, filter: null };
+  setState(newState);
 };
 
 const onClearAll = () => {
@@ -171,10 +189,10 @@ const changeTodoStatus = (todos, todoId) => {
   );
 };
 
-const removeCompleted = (todos) => {
+const getUncheckedTodo = (todos) => {
   return todos.filter((todo) => todo.isComplete === false);
 };
 
-const hideUncomleted = (todos) => {
-  return todos.filter ((todo) => todo.isComplete === true);
-}; 
+const getCheckedTodo = (todos) => {
+  return todos.filter((todo) => todo.isComplete === true);
+};
