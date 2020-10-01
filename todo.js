@@ -66,7 +66,7 @@ ${
 
 const localStorageState = localStorage.getItem("state");
 
-let state = localStorageState
+let state = (localStorageState !== "undefined" && localStorageState !== null)
     ? 
   JSON.parse(localStorageState)
     : 
@@ -87,6 +87,7 @@ const renderToDom = (template) => {
 
 const setState = (newStatePart) => {
   state = { ...state, ...newStatePart };
+  history = history.slice(0, historyIndex+1);
   history.push(state);
   historyIndex = history.length-1;
   const newHtml = render(state);
@@ -152,7 +153,7 @@ const onChangeTodoStatus = (todoId) => {
 };
 
 const onUndo = () => {
-  oldState = history.length > 1 ? history[historyIndex-1] : openState;
+  oldState = (history.length > 1 && historyIndex !== 0) ? history[historyIndex-1] : openState;
   state = oldState;
   historyIndex -= 1;
   localStorage.setItem("state", JSON.stringify(oldState));
